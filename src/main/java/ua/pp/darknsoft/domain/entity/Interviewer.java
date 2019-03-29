@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(name = "UC_INTERVIEWER_EMAIL", columnNames = "email")})
 public class Interviewer extends AbstractEntity {
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
@@ -17,14 +18,17 @@ public class Interviewer extends AbstractEntity {
     private String lastName;
 
     @Pattern(regexp = "/.+@.+\\..+/i")
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false)
     private String email;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "INTERVIEW_INTERVIEWER",
-            joinColumns = @JoinColumn(name = "interview_id"),
-            inverseJoinColumns = @JoinColumn(name = "interviewer_id"))
+            joinColumns = @JoinColumn(name = "interview_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEW")),
+            inverseJoinColumns = @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEWER")))
     private Set<Interview> interviewSet = new HashSet<>();
+
+    @Version
+    private Long version;
 
     public String getFirstName() {
         return firstName;
@@ -56,5 +60,13 @@ public class Interviewer extends AbstractEntity {
 
     public void setInterviewSet(Set<Interview> interviewSet) {
         this.interviewSet = interviewSet;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }

@@ -10,7 +10,8 @@ import java.util.Set;
 public class Interview extends AbstractEntity {
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "candidate_id", nullable = false)
+    @JoinColumn(name = "candidate_id", nullable = false,
+            foreignKey = @ForeignKey(name = "FK_INTERVIEW_CANDIDATE"))
     private Candidate candidate;
 
     @ManyToMany(mappedBy = "interviewSet", cascade = CascadeType.PERSIST)
@@ -23,14 +24,6 @@ public class Interview extends AbstractEntity {
 
     @Enumerated(value = EnumType.STRING)
     private Status status;
-
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
-    @Column(name = "first_name", nullable = false, columnDefinition = "VARCHAR(180)")
-    private String firstName;
-
-    @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
-    @Column(name = "last_name", nullable = true, columnDefinition = "VARCHAR(180)")
-    private String lastName;
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z\\s]{2,255}$")
     @Column(nullable = false)
@@ -77,22 +70,6 @@ public class Interview extends AbstractEntity {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public String getPosition() {

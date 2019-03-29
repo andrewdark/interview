@@ -1,14 +1,12 @@
 package ua.pp.darknsoft.domain.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Table(uniqueConstraints = {@UniqueConstraint(name = "UC_CANDIDATE_EMAIL", columnNames = "email")})
 public class Candidate extends AbstractEntity {
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
@@ -16,15 +14,22 @@ public class Candidate extends AbstractEntity {
     private String firstName;
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
-    @Column(name = "last_name", nullable = true, columnDefinition = "VARCHAR(180)")
+    @Column(name = "last_name", nullable = false, columnDefinition = "VARCHAR(180)")
     private String lastName;
 
     @Pattern(regexp = "/.+@.+\\..+/i")
-    @Column(nullable = true, unique = true)
+    @Column(nullable = false)
     private String email;
+
+    private String skype;
+
+    private String phone;
 
     @OneToMany(mappedBy = "candidate", cascade = CascadeType.PERSIST)
     private Set<Interview> interviewSet = new HashSet<>();
+
+    @Version
+    private Long version;
 
     public String getFirstName() {
         return firstName;
@@ -50,11 +55,35 @@ public class Candidate extends AbstractEntity {
         this.email = email;
     }
 
+    public String getSkype() {
+        return skype;
+    }
+
+    public void setSkype(String skype) {
+        this.skype = skype;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     public Set<Interview> getInterviewSet() {
         return interviewSet;
     }
 
     public void setInterviewSet(Set<Interview> interviewSet) {
         this.interviewSet = interviewSet;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 }
