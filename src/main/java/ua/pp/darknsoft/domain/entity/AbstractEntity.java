@@ -1,4 +1,4 @@
-package ua.pp.darknsoft.entity;
+package ua.pp.darknsoft.domain.entity;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
