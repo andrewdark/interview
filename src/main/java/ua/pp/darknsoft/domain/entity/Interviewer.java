@@ -1,15 +1,12 @@
 package ua.pp.darknsoft.domain.entity;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-public class Candidate extends AbstractEntity {
+public class Interviewer extends AbstractEntity {
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z]{1,180}$")
     @Column(name = "first_name", nullable = false, columnDefinition = "VARCHAR(180)")
@@ -23,7 +20,10 @@ public class Candidate extends AbstractEntity {
     @Column(nullable = true, unique = true)
     private String email;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "INTERVIEW_INTERVIEWER",
+            joinColumns = @JoinColumn(name = "interview_id"),
+            inverseJoinColumns = @JoinColumn(name = "interviewer_id"))
     private Set<Interview> interviewSet = new HashSet<>();
 
     public String getFirstName() {
