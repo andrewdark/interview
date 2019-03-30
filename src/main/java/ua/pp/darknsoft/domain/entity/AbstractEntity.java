@@ -1,8 +1,6 @@
 package ua.pp.darknsoft.domain.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 /**
  * <p>
@@ -18,7 +16,8 @@ import javax.persistence.MappedSuperclass;
 abstract class AbstractEntity {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column()
     private Long id;
 
     public Long getId() {

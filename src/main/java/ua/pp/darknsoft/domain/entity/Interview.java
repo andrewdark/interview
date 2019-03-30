@@ -20,9 +20,11 @@ public class Interview extends AbstractEntity {
     @OneToMany(mappedBy = "interview", cascade = CascadeType.PERSIST)
     private Set<Notes> notesSet = new HashSet<>();
 
+    @Column(nullable = false)
     private LocalDate date;
 
     @Enumerated(value = EnumType.STRING)
+    @Column(nullable = false)
     private Status status;
 
     @Pattern(regexp = "^[a-zA-Z][a-zA-Z\\s]{2,255}$")
