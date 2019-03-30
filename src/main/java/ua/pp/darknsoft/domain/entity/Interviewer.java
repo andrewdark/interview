@@ -23,8 +23,8 @@ public class Interviewer extends AbstractEntity {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "INTERVIEW_INTERVIEWER",
-            joinColumns = @JoinColumn(name = "interview_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEW")),
-            inverseJoinColumns = @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEWER")))
+            joinColumns = @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEWER")),
+            inverseJoinColumns = @JoinColumn(name = "interview_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEW")))
     private Set<Interview> interviewSet = new HashSet<>();
 
     @Version
