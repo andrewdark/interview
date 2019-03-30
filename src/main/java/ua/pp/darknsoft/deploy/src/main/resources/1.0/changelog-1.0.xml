@@ -91,6 +91,7 @@
                        schemaName="public"
                        tableName="interview_interviewer"/>
     </changeSet>
+
     <changeSet id="6" author="stud-asamsonov">
         <addForeignKeyConstraint baseTableName="interview_interviewer"
                                  baseColumnNames="interview_id"
@@ -102,10 +103,59 @@
                                  referencedColumnNames="id"
                                  referencedTableName="interview"/>
     </changeSet>
+
     <changeSet id="7" author="stud-asamsonov">
         <addForeignKeyConstraint baseTableName="interview_interviewer"
                                  baseColumnNames="interviewer_id"
                                  constraintName="fk_inter_interviewer"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="interviewer"/>
+    </changeSet>
+
+    <changeSet id="8" author="stud-asamsonov">
+        <createTable tableName="notes">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="pk_notes" nullable="false"/>
+            </column>
+            <column name="criteria" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="note" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="score" type="INT">
+                <constraints nullable="false" checkConstraint="CHECK SCORE BETWEEN 0 AND 5"/>
+            </column>
+            <column name="version" type="BIGINT"/>
+            <column name="interview_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="interviewer_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="9" author="stud-asamsonov">
+        <addForeignKeyConstraint baseTableName="notes"
+                                 baseColumnNames="interview_id"
+                                 constraintName="fk_notes_interview"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 onDelete="NO ACTION"
+                                 onUpdate="NO ACTION"
+                                 referencedColumnNames="id"
+                                 referencedTableName="interview"/>
+    </changeSet>
+
+    <changeSet id="10" author="stud-asamsonov">
+        <addForeignKeyConstraint baseTableName="notes"
+                                 baseColumnNames="interviewer_id"
+                                 constraintName="fk_notes_interviewer"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  onDelete="NO ACTION"

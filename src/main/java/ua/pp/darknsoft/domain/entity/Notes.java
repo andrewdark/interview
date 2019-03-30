@@ -21,7 +21,7 @@ public class Notes extends AbstractEntity {
     private Interview interview;
 
     @ManyToOne
-    @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_NOTES_INTERVIEWER"))
+    @JoinColumn(name = "interviewer_id", nullable = false, foreignKey = @ForeignKey(name = "FK_NOTES_INTERVIEWER"))
     private Interviewer interviewer;
 
     @Version
