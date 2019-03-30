@@ -128,7 +128,7 @@
                 <constraints nullable="false"/>
             </column>
             <column name="score" type="INT">
-                <constraints nullable="false" checkConstraint="CHECK SCORE BETWEEN 0 AND 5"/>
+                <constraints nullable="false" />
             </column>
             <column name="version" type="BIGINT"/>
             <column name="interview_id" type="BIGINT">
@@ -162,6 +162,13 @@
                                  onUpdate="NO ACTION"
                                  referencedColumnNames="id"
                                  referencedTableName="interviewer"/>
+    </changeSet>
+
+    <changeSet id="11" author="stud-asamsonov">
+        <sql>
+            alter table notes add constraint chk_score_btw
+            CHECK (score BETWEEN 0 AND 5);
+        </sql>
     </changeSet>
 </databaseChangeLog>
 
