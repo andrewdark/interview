@@ -2,6 +2,8 @@ package ua.pp.darknsoft.dao.implementation;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.GenericDao;
 
 import javax.persistence.EntityManager;
@@ -18,9 +20,11 @@ import java.util.List;
  *
  * @since 1.0
  */
+@Transactional
 public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
 
     private final Class<T> clazz;
+    @Autowired
     private EntityManager entityManager;
 
     protected GenericDaoImpl(Class<T> clazz) {
@@ -30,8 +34,7 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
     public EntityManager getEntityManager() {
         return entityManager;
     }
-
-    @PersistenceContext
+    
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
