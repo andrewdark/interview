@@ -17,7 +17,7 @@ public class Candidate extends AbstractEntity {
     @Column(name = "last_name", nullable = false, columnDefinition = "VARCHAR(180)")
     private String lastName;
 
-    @Pattern(regexp = "/.+@.+\\..+/i")
+    @Pattern(regexp = "^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$")
     @Column(nullable = false)
     private String email;
 

@@ -1,10 +1,7 @@
 package ua.pp.darknsoft.dao.configuration;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -30,8 +27,9 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "ua.pp.darknsoft.dao")
+@ComponentScan(basePackages = "ua.pp.darknsoft")
 @PropertySource("classpath:/jpa_h2.properties")
+@Profile("test")
 public class PersistenceJPAConfig {
 
     private final Environment env;
@@ -49,7 +47,7 @@ public class PersistenceJPAConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactory
                 = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setPackagesToScan("com.od.eisgroup.interviewer.domain.entity");
+        entityManagerFactory.setPackagesToScan("ua.pp.darknsoft");
         entityManagerFactory.setDataSource(dataSource());
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
