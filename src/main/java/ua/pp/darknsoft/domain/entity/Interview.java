@@ -9,12 +9,16 @@ import java.util.Set;
 @Entity
 public class Interview extends AbstractEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "candidate_id", nullable = false,
             foreignKey = @ForeignKey(name = "FK_INTERVIEW_CANDIDATE"))
     private Candidate candidate;
 
-    @ManyToMany(mappedBy = "interviewSet", cascade = CascadeType.PERSIST)
+
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "INTERVIEW_INTERVIEWER",
+            joinColumns = @JoinColumn(name = "interview_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEW")),
+            inverseJoinColumns = @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEWER")))
     private Set<Interviewer> interviewerSet = new HashSet<>();
 
     @OneToMany(mappedBy = "interview", cascade = CascadeType.PERSIST)

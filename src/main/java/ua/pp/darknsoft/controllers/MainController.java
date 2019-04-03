@@ -8,20 +8,27 @@ import ua.pp.darknsoft.dao.interfaces.InterviewDao;
 import ua.pp.darknsoft.domain.entity.Candidate;
 import ua.pp.darknsoft.domain.entity.Interview;
 
+import java.util.List;
+
 @Controller
 public class MainController {
 
     @Autowired
-    InterviewDao id;
+    InterviewDao interviewDao;
 
     @GetMapping("/")
     public String index(Model dasModel) {
+
         Interview inter = new Interview();
         Candidate candy = new Candidate();
-        //candy.setFirstName("aaaaab");
         inter.setCandidate(candy);
-        dasModel.addAttribute("interviews", id.getFilteredInterviews(inter));
+        inter.setPosition("Java junior");
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        System.out.println("INFO: " + interviewList.size());
+        dasModel.addAttribute("total", interviewList.size());
+        dasModel.addAttribute("interviews", interviewList);
 
         return "index";
     }
+
 }

@@ -25,8 +25,13 @@ import javax.transaction.Transactional;
 @ActiveProfiles("test")
 public class CandidateDaoITest {
 
-    @Autowired
+
     private CandidateDao cd;
+
+    @Autowired
+    public CandidateDaoITest(CandidateDao cd) {
+        this.cd = cd;
+    }
 
     private EntityManager entityManager;
 

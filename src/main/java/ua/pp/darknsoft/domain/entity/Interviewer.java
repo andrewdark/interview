@@ -17,14 +17,11 @@ public class Interviewer extends AbstractEntity {
     @Column(name = "last_name", nullable = true, columnDefinition = "VARCHAR(180)")
     private String lastName;
 
-    @Pattern(regexp = "/.+@.+\\..+/i")
+    @Pattern(regexp = "^[-\\w.]+@([A-z0-9][-A-z0-9]+\\.)+[A-z]{2,4}$")
     @Column(nullable = false)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
-    @JoinTable(name = "INTERVIEW_INTERVIEWER",
-            joinColumns = @JoinColumn(name = "interviewer_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEWER")),
-            inverseJoinColumns = @JoinColumn(name = "interview_id", foreignKey = @ForeignKey(name = "FK_INTER_INTERVIEW")))
+    @ManyToMany(mappedBy = "interviewerSet", cascade = CascadeType.PERSIST)
     private Set<Interview> interviewSet = new HashSet<>();
 
     @Version

@@ -11,12 +11,21 @@
         <td >ID</td>
         <td>EMAIL</td>
         <td>DATE</td>
+        <td>INTER-S</td>
     </tr>
     <th:block th:each="iw : ${interviews}">
         <tr>
             <td colspan="2" th:text="${iw.id}">...</td>
             <td colspan="2" th:text="${iw.candidate.email}">...</td>
             <td colspan="2" th:text="${iw.date}">...</td>
+            <td colspan="2" th:text="${iw.position}">...</td>
+            <!--<td>-->
+                <!--<th:block th:each="is : ${interviews.interviewerSet}">-->
+                    <!--<p th:text="${is.id}"></p>-->
+                    <!--<p th:text="${is.email}"></p>-->
+                <!--</th:block>-->
+
+            <!--</td>-->
         </tr>
     </th:block>
 </table>
