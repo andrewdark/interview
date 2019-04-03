@@ -1,5 +1,7 @@
 package ua.pp.darknsoft;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,53 +37,13 @@ public class InterviewDaoITest {
     @Autowired
     private InterviewDao interviewDao;
 
+    private static final String POSITION = "Java junior";
+
     @PersistenceContext
     private EntityManager entityManager;
 
-    @Test
-    public void findById() {
-        Candidate candidate = new Candidate();
-        candidate.setFirstName("Colin");
-        candidate.setLastName("Farrell");
-        candidate.setEmail("one1@four.com");
-
-
-        Interviewer interviewer = new Interviewer();
-        interviewer.setFirstName("John");
-        interviewer.setLastName("Doe");
-        interviewer.setEmail("one2@two.com");
-
-
-        Interview interview = new Interview();
-        interview.setCandidate(candidate);
-        interview.setDate(LocalDate.now());
-        interview.setPosition("Junior Java");
-        interview.setStatus(Status.INTERVIEWED);
-
-        interview.getInterviewerSet().add(interviewer);
-
-        interviewDao.save(interview);
-
-        entityManager.flush();
-        entityManager.clear();
-
-        Long id = interview.getId();
-
-        Interview saved = interviewDao.findById(id);
-        assertNotNull(saved);
-        assertNotNull(saved.getInterviewerSet());
-        assertEquals(1, saved.getInterviewerSet().size());
-        assertEquals(interview.getCandidate().getFirstName(), saved.getCandidate().getFirstName());
-        assertEquals(interview.getStatus(), saved.getStatus());
-
-        for (Interviewer interviewer1 : saved.getInterviewerSet()) {
-            assertEquals(interviewer1.getEmail(), interviewer.getEmail());
-        }
-    }
-
-
-    @Test
-    public void getFilteredInterview_01() {
+    @BeforeEach
+    public void initMet() {
         Interview inter1 = new Interview();
         inter1.setStatus(Status.INTERVIEWED);
         inter1.setDate(LocalDate.of(2019, 1, 1));
@@ -136,13 +98,105 @@ public class InterviewDaoITest {
         interviewDao.save(inter5);
         entityManager.flush();
         entityManager.clear();
+    }
+
+    @Test
+    public void findById() {
+        Candidate candidate = new Candidate();
+        candidate.setFirstName("Colin");
+        candidate.setLastName("Farrell");
+        candidate.setEmail("one1@four.com");
+
+        Interviewer interviewer = new Interviewer();
+        interviewer.setFirstName("John");
+        interviewer.setLastName("Doe");
+        interviewer.setEmail("one2@two.com");
+
+        Interview interview = new Interview();
+        interview.setCandidate(candidate);
+        interview.setDate(LocalDate.now());
+        interview.setPosition("Junior Java");
+        interview.setStatus(Status.INTERVIEWED);
+
+        interview.getInterviewerSet().add(interviewer);
+
+        interviewDao.save(interview);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        Long id = interview.getId();
+
+        Interview saved = interviewDao.findById(id);
+        assertNotNull(saved);
+        assertNotNull(saved.getInterviewerSet());
+        assertEquals(1, saved.getInterviewerSet().size());
+        assertEquals(interview.getCandidate().getFirstName(), saved.getCandidate().getFirstName());
+        assertEquals(interview.getStatus(), saved.getStatus());
+
+        for (Interviewer interviewer1 : saved.getInterviewerSet()) {
+            assertEquals(interviewer1.getEmail(), interviewer.getEmail());
+        }
+    }
+
+
+    @Test
+    public void getFilteredInterview_01() {
+        Assertions.assertThrows(org.springframework.dao.InvalidDataAccessApiUsageException.class, () -> {
+            interviewDao.getFilteredInterviews(null);
+        });
+    }
+
+    @Test
+    public void getFilteredInterview_02() {
 
         Interview inter = new Interview();
         Candidate candy = new Candidate();
         inter.setCandidate(candy);
         inter.setPosition("Java junior");
         List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
-        System.out.println("INFO: " + interviewList.size());
         assertEquals(2, interviewList.size());
+        for (Interview inter_x : interviewList) {
+            assertEquals(inter_x.getPosition(), POSITION);
+        }
+    }
+
+    @Test
+    public void getFilteredInterview_03() {
+
+        Interview inter = new Interview();
+        Candidate candy = new Candidate();
+        inter.setCandidate(candy);
+        inter.setDate(LocalDate.of(2019, 1, 1));
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        assertEquals(2, interviewList.size());
+        for (Interview inter_x : interviewList) {
+            assertEquals(inter_x.getDate(), LocalDate.of(2019, 1, 1));
+        }
+    }
+
+    @Test
+    public void getFilteredInterview_04() {
+
+        Interview inter = new Interview();
+        Candidate candy = new Candidate();
+        inter.setCandidate(candy);
+        inter.setDate(LocalDate.of(2019, 1, 28));
+        inter.setPosition(POSITION);
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        assertEquals(1, interviewList.size());
+    }
+
+    @Test
+    public void getFilteredInterview_05() {
+
+        Interview inter = new Interview();
+        Candidate candy = new Candidate();
+        candy.setEmail("Winnfield@pf.com");
+        inter.setCandidate(candy);
+        inter.setDate(LocalDate.of(2019, 1, 2));
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        assertEquals(1, interviewList.size());
+        assertEquals("Winnfield@pf.com", interviewList.get(0).getCandidate().getEmail());
     }
 }

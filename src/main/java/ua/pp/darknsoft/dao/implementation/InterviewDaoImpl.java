@@ -2,11 +2,11 @@ package ua.pp.darknsoft.dao.implementation;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.Assert;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
 import ua.pp.darknsoft.domain.entity.Candidate;
 import ua.pp.darknsoft.domain.entity.Interview;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,7 +20,8 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
 
     @Override
     public List<Interview> getFilteredInterviews(Interview interview) {
-        if (interview == null) return new ArrayList<Interview>();
+        Assert.notNull(interview, "BAD param. Interview is not null");
+
         if (interview.getCandidate() == null) {
             interview.setCandidate(new Candidate());
         }
