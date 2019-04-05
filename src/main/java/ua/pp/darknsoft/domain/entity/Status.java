@@ -1,7 +1,7 @@
 package ua.pp.darknsoft.domain.entity;
 
 public enum Status {
-    SHEDULED("Scheduled Interview"),
+    SCHEDULED("Scheduled Interview"),
     INTERVIEWED("Interviewed"),
     HOLD("Put On Hold"),
     OFFERED("Position Offered"),

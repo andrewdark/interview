@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -92,5 +93,20 @@ public class Interview extends AbstractEntity {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Interview)) return false;
+        Interview interview = (Interview) o;
+        return candidate.equals(interview.candidate) &&
+                date.equals(interview.date) &&
+                position.equals(interview.position);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(candidate, date, position);
     }
 }

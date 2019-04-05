@@ -3,6 +3,7 @@ package ua.pp.darknsoft.domain.entity;
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -85,5 +86,20 @@ public class Candidate extends AbstractEntity {
 
     public void setVersion(Long version) {
         this.version = version;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Candidate)) return false;
+        Candidate candidate = (Candidate) o;
+        return firstName.equals(candidate.firstName) &&
+                lastName.equals(candidate.lastName) &&
+                email.equals(candidate.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(firstName, lastName, email);
     }
 }

@@ -57,7 +57,7 @@ public class InterviewDaoITest {
         inter3.setDate(LocalDate.of(2019, 1, 1));
         inter3.setPosition("HR manager");
         Interview inter4 = new Interview();
-        inter4.setStatus(Status.SHEDULED);
+        inter4.setStatus(Status.SCHEDULED);
         inter4.setDate(LocalDate.of(2019, 12, 4));
         inter4.setPosition("FrontEnd Senior");
         Interview inter5 = new Interview();
