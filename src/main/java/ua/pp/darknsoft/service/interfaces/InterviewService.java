@@ -2,7 +2,7 @@ package ua.pp.darknsoft.service.interfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import ua.pp.darknsoft.domain.dto.FilterInterviewDto;
+import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Interview;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public interface InterviewService {
 
     List<Interview> findAll();
 
-    List<FilterInterviewDto> findWithFilter(Interview interview);
+    List<FilterInterviewBuilder> findWithFilter(FilterInterviewBuilder filterInterviewBuilder);
 
     Page<Interview> findAll(Pageable pageable);
 

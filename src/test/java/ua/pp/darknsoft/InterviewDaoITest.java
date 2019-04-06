@@ -1,6 +1,5 @@
 package ua.pp.darknsoft;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +11,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import ua.pp.darknsoft.dao.configuration.PersistenceJPAConfig;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
+import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Candidate;
 import ua.pp.darknsoft.domain.entity.Interview;
 import ua.pp.darknsoft.domain.entity.Interviewer;
@@ -139,22 +139,10 @@ public class InterviewDaoITest {
         }
     }
 
-
-    @Test
-    public void getFilteredInterview_01() {
-        Assertions.assertThrows(org.springframework.dao.InvalidDataAccessApiUsageException.class, () -> {
-            interviewDao.getFilteredInterviews(null);
-        });
-    }
-
     @Test
     public void getFilteredInterview_02() {
-
-        Interview inter = new Interview();
-        Candidate candy = new Candidate();
-        inter.setCandidate(candy);
-        inter.setPosition("Java junior");
-        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder().withPosition(POSITION).build();
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(2, interviewList.size());
         for (Interview inter_x : interviewList) {
             assertEquals(inter_x.getPosition(), POSITION);
@@ -164,11 +152,9 @@ public class InterviewDaoITest {
     @Test
     public void getFilteredInterview_03() {
 
-        Interview inter = new Interview();
-        Candidate candy = new Candidate();
-        inter.setCandidate(candy);
-        inter.setDate(LocalDate.of(2019, 1, 1));
-        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
+                .withDate(LocalDate.of(2019, 1, 1)).build();
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(2, interviewList.size());
         for (Interview inter_x : interviewList) {
             assertEquals(inter_x.getDate(), LocalDate.of(2019, 1, 1));
@@ -178,24 +164,21 @@ public class InterviewDaoITest {
     @Test
     public void getFilteredInterview_04() {
 
-        Interview inter = new Interview();
-        Candidate candy = new Candidate();
-        inter.setCandidate(candy);
-        inter.setDate(LocalDate.of(2019, 1, 28));
-        inter.setPosition(POSITION);
-        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
+                .withPosition(POSITION)
+                .withDate(LocalDate.of(2019, 1, 28))
+                .build();
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(1, interviewList.size());
     }
 
     @Test
     public void getFilteredInterview_05() {
 
-        Interview inter = new Interview();
-        Candidate candy = new Candidate();
-        candy.setEmail("Winnfield@pf.com");
-        inter.setCandidate(candy);
-        inter.setDate(LocalDate.of(2019, 1, 2));
-        List<Interview> interviewList = interviewDao.getFilteredInterviews(inter);
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
+                .withEmail("Winnfield@pf.com")
+                .withDate(LocalDate.of(2019, 1, 2)).build();
+        List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(1, interviewList.size());
         assertEquals("Winnfield@pf.com", interviewList.get(0).getCandidate().getEmail());
     }

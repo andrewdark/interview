@@ -26,6 +26,7 @@ public class Interview extends AbstractEntity {
     private Set<Notes> notesSet = new HashSet<>();
 
     @Column(nullable = false)
+
     private LocalDate date;
 
     @Enumerated(value = EnumType.STRING)

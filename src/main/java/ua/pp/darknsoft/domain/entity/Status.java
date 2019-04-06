@@ -7,10 +7,13 @@ public enum Status {
     OFFERED("Position Offered"),
     NOTQUALIFIED("Not Qualified");
 
-    private String value;
+    private final String displayName;
 
-    Status(String value) {
-        this.value = value;
+    Status(String displayName) {
+        this.displayName = displayName;
     }
 
+    public String getDisplayName() {
+        return displayName;
+    }
 }

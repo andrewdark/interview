@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
 }
@@ -21,18 +21,18 @@ ul.menu {
     border-radius: 4px;
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
-    width: 900px;
+    /*width: 900px;*/
     height: 36px;
 }
 
-ul.menu>li {
+ul.menu > li {
     float: left;
     list-style: none;
     border-right: 1px solid #4f4f4f;
     position: relative;
 }
 
-ul.menu>li>a {
+ul.menu > li > a {
     color: white;
     display: block;
     padding: 8px 20px 10px;
@@ -40,21 +40,21 @@ ul.menu>li>a {
     border-right: 1px solid #2b2b2b;
 }
 
-ul.menu>li>a:hover {
+ul.menu > li > a:hover {
     background-color: #2b2b2b;
 }
 
-ul.menu>li:first-child>a:hover {
+ul.menu > li:first-child > a:hover {
     border-radius: 4px 0 0 4px;
     -webkit-border-radius: 4px 0 0 4px;
     -moz-border-radius: 4px 0 0 4px;
 }
 
-ul.menu>li>ul {
+ul.menu > li > ul {
     display: none;
 }
 
-ul.menu>li:hover>ul {
+ul.menu > li:hover > ul {
     display: block;
     position: absolute;
     top: 36px;
@@ -65,13 +65,13 @@ ul.menu>li:hover>ul {
     z-index: 1000;
 }
 
-ul.menu>li:hover>ul>li {
+ul.menu > li:hover > ul > li {
     float: none;
     width: 150px;
     list-style: none;
 }
 
-ul.menu>li:hover>ul>li>a {
+ul.menu > li:hover > ul > li > a {
     border-top: 1px solid #4f4f4f;
     padding: 6px 20px 8px;
     display: block;
@@ -79,26 +79,53 @@ ul.menu>li:hover>ul>li>a {
     text-decoration: none;
 }
 
-ul.menu>li:hover>ul>li>a:hover {
+ul.menu > li:hover > ul > li > a:hover {
     background-color: transparent;
     color: #c1deff;
 }
 
-#wrapper{
-    margin-left:auto;
-    margin-right:auto;
-    height:auto;
-    width:auto;
+#wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    height: auto;
+    width: auto;
 }
 
 #inner1, #inner2 {
     /*border: 1px solid black;*/
 }
 
+#inner4 {
+    align-items: center;
+    justify-content: center;
+}
+
+button.search {
+    height: 20px;
+    width: 100px;
+    margin: 30px 0;
+}
+
+button.back {
+    height: 20px;
+    width: 100px;
+    margin: 30px -50px;
+    position: relative;
+    top: 50%;
+    left: 50%;
+}
+
 table.interview {
     width: 100%;
 }
+
+caption {
+    text-align: left;
+    margin: 5px;
+    font-size: 24px;
+}
+
 th.col {
-    background:lightsteelblue;
+    background: lightsteelblue;
     color: black;
 }

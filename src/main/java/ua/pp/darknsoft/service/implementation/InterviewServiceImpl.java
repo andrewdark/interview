@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
-import ua.pp.darknsoft.domain.dto.FilterInterviewDto;
+import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Interview;
 import ua.pp.darknsoft.service.interfaces.InterviewService;
 
@@ -32,11 +32,11 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public List<FilterInterviewDto> findWithFilter(Interview interview) {
+    public List<FilterInterviewBuilder> findWithFilter(FilterInterviewBuilder filterInterviewBuilder) {
 
-        List<FilterInterviewDto> filterInterviews = new ArrayList<>();
-        for (Interview inter : interviewDao.getFilteredInterviews(interview)) {
-            FilterInterviewDto fid = new FilterInterviewDto.Builder()
+        List<FilterInterviewBuilder> filterInterviews = new ArrayList<>();
+        for (Interview inter : interviewDao.getFilteredInterviews(filterInterviewBuilder)) {
+            FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
                     .withId(inter.getId())
                     .withPosition(inter.getPosition())
                     .withStatus(inter.getStatus())
