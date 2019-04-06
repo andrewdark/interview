@@ -8,24 +8,22 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.support.AnnotationConfigContextLoader;
+import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.configuration.PersistenceJPAConfig;
 import ua.pp.darknsoft.dao.interfaces.CandidateDao;
 import ua.pp.darknsoft.domain.entity.Candidate;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.transaction.Transactional;
 
 @Rollback
 @Transactional
 @ExtendWith(SpringExtension.class)
-@ContextConfiguration(classes = {PersistenceJPAConfig.class},
-        loader = AnnotationConfigContextLoader.class)
+@ContextConfiguration(classes = {PersistenceJPAConfig.class})
 @ActiveProfiles("test")
 public class CandidateDaoITest {
 
-
+    @Autowired
     private CandidateDao cd;
 
     @Autowired

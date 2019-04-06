@@ -1,7 +1,6 @@
 package ua.pp.darknsoft.dao.implementation;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.GenericDao;
@@ -12,19 +11,19 @@ import java.util.List;
 
 /**
  * <p>
- *     This class represented abstract and generic implementation of
- *     {@link ua.pp.darknsoft.dao.interfaces.GenericDao} interface.
+ * This class represented abstract and generic implementation of
+ * {@link ua.pp.darknsoft.dao.interfaces.GenericDao} interface.
  * </p>
  *
  * @author <a href='mailto:aoleynik@eisgroup.com'>Alexander Oleynik</a>
- *
  * @since 1.0
  */
-@Transactional
+
 public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
 
     private final Class<T> clazz;
     @Autowired
+    @PersistenceContext
     private EntityManager entityManager;
 
     protected GenericDaoImpl(Class<T> clazz) {
@@ -34,7 +33,7 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
     public EntityManager getEntityManager() {
         return entityManager;
     }
-    
+
     public void setEntityManager(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
@@ -50,7 +49,7 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
 
     @Override
     public List<T> findAll() {
-        return getEntityManager().createQuery("from "+getClazz().getSimpleName(), getClazz()).getResultList();
+        return getEntityManager().createQuery("from " + getClazz().getSimpleName(), getClazz()).getResultList();
     }
 
     @Override

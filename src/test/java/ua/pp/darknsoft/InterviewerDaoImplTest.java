@@ -16,7 +16,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 
@@ -43,7 +43,7 @@ public class InterviewerDaoImplTest {
     }
 
     @Test
-    public void findById(){
+    public void findById() {
 
         Interviewer interviewer = new Interviewer();
         interviewer.setFirstName("John");

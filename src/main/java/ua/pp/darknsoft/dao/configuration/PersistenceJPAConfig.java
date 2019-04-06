@@ -27,7 +27,7 @@ import java.util.Properties;
  */
 @Configuration
 @EnableTransactionManagement
-@ComponentScan(basePackages = "ua.pp.darknsoft")
+@ComponentScan(basePackages = "ua.pp.darknsoft.dao")
 @PropertySource("classpath:/jpa_h2.properties")
 @Profile("test")
 public class PersistenceJPAConfig {
@@ -47,7 +47,7 @@ public class PersistenceJPAConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean entityManagerFactory
                 = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactory.setPackagesToScan("ua.pp.darknsoft");
+        entityManagerFactory.setPackagesToScan("ua.pp.darknsoft.domain");
         entityManagerFactory.setDataSource(dataSource());
 
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();

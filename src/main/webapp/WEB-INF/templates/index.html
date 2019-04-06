@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Store</title>
+    <link rel="stylesheet" th:href="@{css/main.css}">
+</head>
+<body>
+
+<div id="wrapper">
+    <div id="inner1">
+        <ul class="menu">
+            <li><a href="/">Main</a></li>
+            <li><a href="/">Search</a>
+                <ul>
+                    <li><a href="">Get All</a></li>
+                    <li><a href="">Get Filtered</a></li>
+                </ul>
+            </li>
+
+            <li><a href="">Reviews</a></li>
+            <li><a href="https://github.com/andrewdark/interview">View source code</a></li>
+        </ul>
+    </div>
+    <div id="inner2">
+        <table class="interview">
+            <caption>Interviews Search</caption>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td><input type="text"></td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><input type="text"></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td><button>Search</button></td><td></td>
+            </tr>
+
+        </table>
+    </div>
+    <div id="inner3">
+        <table class="interview">
+            <caption>Interviews</caption>
+            <tr>
+                <th class="col">First Name</th>
+                <th class="col">Last Name</th>
+                <th class="col">Date</th>
+                <th class="col">Position</th>
+                <th class="col">Status</th>
+                <th class="col">Actions</th>
+            </tr>
+            <th:block th:each="inter : ${interviews}">
+                <tr>
+                    <td th:text="${inter.firstName}">...</td>
+                    <td th:text="${inter.lastName}">...</td>
+                    <td th:text="${inter.date}">...</td>
+                    <td th:text="${inter.position}">...</td>
+                    <td th:text="${inter.Status}">...</td>
+                    <td>
+                        <a href="">View</a><a href="">Conduct</a><a href="">Edit</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>

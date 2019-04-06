@@ -10,13 +10,11 @@ import ua.pp.darknsoft.domain.entity.Interview;
 import java.util.List;
 
 @Repository
-@Transactional
 public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements InterviewDao {
 
     public InterviewDaoImpl() {
         super(Interview.class);
     }
-
 
     @Override
     public List<Interview> getFilteredInterviews(Interview interview) {
