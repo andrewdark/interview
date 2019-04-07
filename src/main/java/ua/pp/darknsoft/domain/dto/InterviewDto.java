@@ -2,18 +2,16 @@ package ua.pp.darknsoft.domain.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import ua.pp.darknsoft.domain.entity.Notes;
 import ua.pp.darknsoft.domain.entity.Status;
 import ua.pp.darknsoft.util.LocalDateDeserializer;
 import ua.pp.darknsoft.util.LocalDateSerializer;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.HashSet;
+import java.util.Set;
 
-public class EditInterviewDto {
+public class InterviewDto {
     @NotNull
     private Long id;
     @NotNull
@@ -25,12 +23,11 @@ public class EditInterviewDto {
     @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
     @NotNull
-    private String firstName;
+    private CandidateDto candidateDto;
+
+    private Set<NoteDto> noteDtoSet = new HashSet<>();
     @NotNull
-    private String lastName;
-    @NotNull
-    private String email;
-    private List<Notes> notes = new ArrayList<>();
+    private Set<InterviewerDto> interviewerDtoSet = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -64,52 +61,47 @@ public class EditInterviewDto {
         this.date = date;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public CandidateDto getCandidateDto() {
+        return candidateDto;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCandidateDto(CandidateDto candidateDto) {
+        this.candidateDto = candidateDto;
     }
 
-    public String getLastName() {
-        return lastName;
+    public Set<NoteDto> getNoteDtoSet() {
+        return noteDtoSet;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setNoteDtoSet(Set<NoteDto> noteDtoSet) {
+        this.noteDtoSet = noteDtoSet;
     }
 
-    public String getEmail() {
-        return email;
+    public Set<InterviewerDto> getInterviewerDtoSet() {
+        return interviewerDtoSet;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public List<Notes> getNotes() {
-        return notes;
-    }
-
-    public void setNotes(List<Notes> notes) {
-        this.notes = notes;
+    public void setInterviewerDtoSet(Set<InterviewerDto> interviewerDtoSet) {
+        this.interviewerDtoSet = interviewerDtoSet;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof EditInterviewDto)) return false;
-        EditInterviewDto that = (EditInterviewDto) o;
-        return position.equals(that.position) &&
-                date.equals(that.date) &&
-                firstName.equals(that.firstName) &&
-                lastName.equals(that.lastName) &&
-                email.equals(that.email);
+        if (!(o instanceof InterviewDto)) return false;
+
+        InterviewDto that = (InterviewDto) o;
+
+        if (!position.equals(that.position)) return false;
+        if (!date.equals(that.date)) return false;
+        return candidateDto.equals(that.candidateDto);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(position, date, firstName, lastName, email);
+        int result = position.hashCode();
+        result = 31 * result + date.hashCode();
+        result = 31 * result + candidateDto.hashCode();
+        return result;
     }
 }

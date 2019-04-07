@@ -23,7 +23,7 @@ public class Interview extends AbstractEntity {
     private Set<Interviewer> interviewerSet = new HashSet<>();
 
     @OneToMany(mappedBy = "interview", cascade = CascadeType.PERSIST)
-    private Set<Notes> notesSet = new HashSet<>();
+    private Set<Note> noteSet = new HashSet<>();
 
     @Column(nullable = false)
 
@@ -56,12 +56,12 @@ public class Interview extends AbstractEntity {
         this.interviewerSet = interviewerSet;
     }
 
-    public Set<Notes> getNotesSet() {
-        return notesSet;
+    public Set<Note> getNoteSet() {
+        return noteSet;
     }
 
-    public void setNotesSet(Set<Notes> notesSet) {
-        this.notesSet = notesSet;
+    public void setNoteSet(Set<Note> noteSet) {
+        this.noteSet = noteSet;
     }
 
     public LocalDate getDate() {

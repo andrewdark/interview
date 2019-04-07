@@ -2,6 +2,7 @@ package ua.pp.darknsoft.service.interfaces;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Interview;
 
@@ -10,7 +11,7 @@ import java.util.Optional;
 
 public interface InterviewService {
 
-    Optional<Interview> findById(Long id);
+    Optional<InterviewDto> findById(Long id);
 
     List<Interview> findAll();
 

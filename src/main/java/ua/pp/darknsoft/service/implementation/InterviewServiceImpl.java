@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
+import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Interview;
 import ua.pp.darknsoft.service.interfaces.InterviewService;
@@ -22,8 +23,9 @@ public class InterviewServiceImpl implements InterviewService {
     InterviewDao interviewDao;
 
     @Override
-    public Optional<Interview> findById(Long id) {
-        return Optional.empty();
+    public Optional<InterviewDto> findById(Long id) {
+        Optional<InterviewDto> userOptional = Optional.of(new InterviewDto());
+        return userOptional;
     }
 
     @Override

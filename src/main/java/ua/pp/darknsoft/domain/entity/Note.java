@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 
 @Entity
-public class Notes extends AbstractEntity {
+public class Note extends AbstractEntity {
 
     @Column(nullable = false)
     private String criteria;
