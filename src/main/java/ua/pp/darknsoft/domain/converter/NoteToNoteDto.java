@@ -8,16 +8,14 @@ import ua.pp.darknsoft.domain.dto.NoteDto;
 import ua.pp.darknsoft.domain.entity.Note;
 
 @Component
-public class NotesToNotesDto implements Converter<Note, NoteDto> {
+public class NoteToNoteDto implements Converter<Note, NoteDto> {
     private final Object $lock = new Object[0];
 
     private InterviewerToInterviewerDto interviewerConverter;
-    private InterviewToInterviewDto interviewConverter;
 
     @Autowired
-    public NotesToNotesDto(InterviewerToInterviewerDto interviewerConverter, InterviewToInterviewDto interviewConverter) {
+    public NoteToNoteDto(InterviewerToInterviewerDto interviewerConverter) {
         this.interviewerConverter = interviewerConverter;
-        this.interviewConverter = interviewConverter;
     }
 
     @Nullable
@@ -30,14 +28,12 @@ public class NotesToNotesDto implements Converter<Note, NoteDto> {
             final NoteDto noteDto = new NoteDto();
             noteDto.setId(note.getId());
             noteDto.setCriteria(note.getCriteria());
+            noteDto.setNote(note.getNote());
             noteDto.setScore(note.getScore());
-            if (note.getInterview() != null) {
-                noteDto.setInterviewDto(interviewConverter.convert(note.getInterview()));
-            }
             if (note.getInterviewer() != null) {
                 noteDto.setInterviewerDto(interviewerConverter.convert(note.getInterviewer()));
             }
-            
+
             return noteDto;
         }
     }

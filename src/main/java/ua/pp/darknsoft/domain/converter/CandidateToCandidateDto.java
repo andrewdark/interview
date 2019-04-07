@@ -24,6 +24,7 @@ public class CandidateToCandidateDto implements Converter<Candidate, CandidateDt
             candidateDto.setLastName(candidate.getLastName());
             candidateDto.setPhone(candidate.getPhone());
             candidateDto.setSkype(candidate.getSkype());
+
             return candidateDto;
         }
     }

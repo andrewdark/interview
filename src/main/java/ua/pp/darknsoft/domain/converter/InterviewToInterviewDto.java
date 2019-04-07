@@ -14,10 +14,10 @@ public class InterviewToInterviewDto implements Converter<Interview, InterviewDt
 
     private CandidateToCandidateDto candidateConverter;
     private InterviewerToInterviewerDto interviewerConverter;
-    private NotesToNotesDto notesConverter;
+    private NoteToNoteDto notesConverter;
 
     @Autowired
-    public InterviewToInterviewDto(CandidateToCandidateDto candidateConverter, InterviewerToInterviewerDto interviewerConverter, NotesToNotesDto notesConverter) {
+    public InterviewToInterviewDto(CandidateToCandidateDto candidateConverter, InterviewerToInterviewerDto interviewerConverter, NoteToNoteDto notesConverter) {
         this.candidateConverter = candidateConverter;
         this.interviewerConverter = interviewerConverter;
         this.notesConverter = notesConverter;

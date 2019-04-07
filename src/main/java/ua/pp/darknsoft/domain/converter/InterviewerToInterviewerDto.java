@@ -22,6 +22,7 @@ public class InterviewerToInterviewerDto implements Converter<Interviewer, Inter
             interviewerDto.setEmail(interviewer.getEmail());
             interviewerDto.setFirstName(interviewer.getFirstName());
             interviewerDto.setLastName(interviewer.getLastName());
+
             return interviewerDto;
         }
     }
