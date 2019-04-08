@@ -38,64 +38,68 @@ public class InterviewDaoITest {
     private InterviewDao interviewDao;
 
     private static final String POSITION = "Java junior";
+    private static final String EMAIL = "Winnfield@pf.com";
+    private static final LocalDate I_DATE02 = LocalDate.of(2019, 1, 1);
+    private static final LocalDate I_DATE03 = LocalDate.of(2019, 1, 28);
+    private static final LocalDate I_DATE04 = LocalDate.of(2019, 1, 2);
 
     @PersistenceContext
     private EntityManager entityManager;
 
     @BeforeEach
     public void initMet() {
-        Interview inter1 = new Interview();
-        inter1.setStatus(Status.INTERVIEWED);
-        inter1.setDate(LocalDate.of(2019, 1, 1));
-        inter1.setPosition("Manual QA");
-        Interview inter2 = new Interview();
-        inter2.setStatus(Status.INTERVIEWED);
-        inter2.setDate(LocalDate.of(2019, 1, 2));
-        inter2.setPosition("Java junior");
-        Interview inter3 = new Interview();
-        inter3.setStatus(Status.INTERVIEWED);
-        inter3.setDate(LocalDate.of(2019, 1, 1));
-        inter3.setPosition("HR manager");
-        Interview inter4 = new Interview();
-        inter4.setStatus(Status.SCHEDULED);
-        inter4.setDate(LocalDate.of(2019, 12, 4));
-        inter4.setPosition("FrontEnd Senior");
-        Interview inter5 = new Interview();
-        inter5.setStatus(Status.NOTQUALIFIED);
-        inter5.setDate(LocalDate.of(2019, 1, 28));
-        inter5.setPosition("Java junior");
+        Interview interview01 = new Interview();
+        interview01.setStatus(Status.INTERVIEWED);
+        interview01.setDate(LocalDate.of(2019, 1, 1));
+        interview01.setPosition("Manual QA");
+        Interview interview02 = new Interview();
+        interview02.setStatus(Status.INTERVIEWED);
+        interview02.setDate(LocalDate.of(2019, 1, 2));
+        interview02.setPosition("Java junior");
+        Interview interview03 = new Interview();
+        interview03.setStatus(Status.INTERVIEWED);
+        interview03.setDate(LocalDate.of(2019, 1, 1));
+        interview03.setPosition("HR manager");
+        Interview interview04 = new Interview();
+        interview04.setStatus(Status.SCHEDULED);
+        interview04.setDate(LocalDate.of(2019, 12, 4));
+        interview04.setPosition("FrontEnd Senior");
+        Interview interview05 = new Interview();
+        interview05.setStatus(Status.NOTQUALIFIED);
+        interview05.setDate(LocalDate.of(2019, 1, 28));
+        interview05.setPosition("Java junior");
 
-        Candidate candy1 = new Candidate();
-        candy1.setFirstName("Vincent");
-        candy1.setLastName("Vega");
-        candy1.setEmail("vv@pf.com");
-        inter1.setCandidate(candy1);
+        Candidate candidate01 = new Candidate();
+        candidate01.setFirstName("Vincent");
+        candidate01.setLastName("Vega");
+        candidate01.setEmail("vv@pf.com");
+        interview01.setCandidate(candidate01);
 
-        Candidate candy2 = new Candidate();
-        candy2.setFirstName("Jules");
-        candy2.setLastName("Winnfield");
-        candy2.setEmail("Winnfield@pf.com");
-        inter2.setCandidate(candy2);
+        Candidate candidate02 = new Candidate();
+        candidate02.setFirstName("Jules");
+        candidate02.setLastName("Winnfield");
+        candidate02.setEmail("Winnfield@pf.com");
+        interview02.setCandidate(candidate02);
 
-        Candidate candy3 = new Candidate();
-        candy3.setFirstName("Mia");
-        candy3.setLastName("Wallace");
-        candy3.setEmail("mia-w@pf.com");
-        inter3.setCandidate(candy3);
+        Candidate candidate03 = new Candidate();
+        candidate03.setFirstName("Mia");
+        candidate03.setLastName("Wallace");
+        candidate03.setEmail("mia-w@pf.com");
+        interview03.setCandidate(candidate03);
 
-        Candidate candy4 = new Candidate();
-        candy4.setFirstName("Winston");
-        candy4.setLastName("Wolfe");
-        candy4.setEmail("wwolfe@pf.com");
-        inter4.setCandidate(candy4);
+        Candidate candidate04 = new Candidate();
+        candidate04.setFirstName("Winston");
+        candidate04.setLastName("Wolfe");
+        candidate04.setEmail("wwolfe@pf.com");
+        interview04.setCandidate(candidate04);
 
-        inter5.setCandidate(candy1);
+        interview05.setCandidate(candidate01);
 
-        interviewDao.save(inter1);
-        interviewDao.save(inter2);
-        interviewDao.save(inter3);
-        interviewDao.save(inter4);
-        interviewDao.save(inter5);
+        interviewDao.save(interview01);
+        interviewDao.save(interview02);
+        interviewDao.save(interview03);
+        interviewDao.save(interview04);
+        interviewDao.save(interview05);
         entityManager.flush();
         entityManager.clear();
     }
@@ -140,7 +144,7 @@ public class InterviewDaoITest {
     }
 
     @Test
-    public void getFilteredInterview_02() {
+    public void getInterviewWithFilterParamPosition() {
         FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder().withPosition(POSITION).build();
         List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(2, interviewList.size());
@@ -150,36 +154,31 @@ public class InterviewDaoITest {
     }
 
     @Test
-    public void getFilteredInterview_03() {
+    public void getInterviewWithFilterParamDate() {
 
-        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
-                .withDate(LocalDate.of(2019, 1, 1)).build();
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder().withDate(I_DATE02).build();
         List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(2, interviewList.size());
         for (Interview inter_x : interviewList) {
-            assertEquals(inter_x.getDate(), LocalDate.of(2019, 1, 1));
+            assertEquals(inter_x.getDate(), I_DATE02);
         }
     }
 
     @Test
-    public void getFilteredInterview_04() {
+    public void getInterviewWithFilterParamsDateAndPosition() {
 
         FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
-                .withPosition(POSITION)
-                .withDate(LocalDate.of(2019, 1, 28))
-                .build();
+                .withPosition(POSITION).withDate(I_DATE03).build();
         List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(1, interviewList.size());
     }
 
     @Test
-    public void getFilteredInterview_05() {
+    public void getInterviewWithFilterParamsDateAndEmail() {
 
-        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder()
-                .withEmail("Winnfield@pf.com")
-                .withDate(LocalDate.of(2019, 1, 2)).build();
+        FilterInterviewBuilder fid = new FilterInterviewBuilder.Builder().withEmail(EMAIL).withDate(I_DATE04).build();
         List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(1, interviewList.size());
-        assertEquals("Winnfield@pf.com", interviewList.get(0).getCandidate().getEmail());
+        assertEquals(EMAIL, interviewList.get(0).getCandidate().getEmail());
     }
 }

@@ -26,14 +26,14 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 @ContextConfiguration(classes = {PersistenceJPAConfig.class},
         loader = AnnotationConfigContextLoader.class)
 @ActiveProfiles("test")
-public class InterviewerDaoImplTest {
+public class InterviewerDaoITest {
 
     private final InterviewerDao interviewerDao;
 
     private EntityManager manager;
 
     @Autowired
-    public InterviewerDaoImplTest(InterviewerDao interviewerDao) {
+    public InterviewerDaoITest(InterviewerDao interviewerDao) {
         this.interviewerDao = interviewerDao;
     }
 
