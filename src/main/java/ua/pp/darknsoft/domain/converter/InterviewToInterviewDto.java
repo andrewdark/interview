@@ -14,13 +14,13 @@ public class InterviewToInterviewDto implements Converter<Interview, InterviewDt
 
     private CandidateToCandidateDto candidateConverter;
     private InterviewerToInterviewerDto interviewerConverter;
-    private NoteToNoteDto notesConverter;
+    private NoteToNoteDto noteConverter;
 
     @Autowired
-    public InterviewToInterviewDto(CandidateToCandidateDto candidateConverter, InterviewerToInterviewerDto interviewerConverter, NoteToNoteDto notesConverter) {
+    public InterviewToInterviewDto(CandidateToCandidateDto candidateConverter, InterviewerToInterviewerDto interviewerConverter, NoteToNoteDto noteConverter) {
         this.candidateConverter = candidateConverter;
         this.interviewerConverter = interviewerConverter;
-        this.notesConverter = notesConverter;
+        this.noteConverter = noteConverter;
     }
 
     @Nullable
@@ -47,7 +47,7 @@ public class InterviewToInterviewDto implements Converter<Interview, InterviewDt
             }
 
             if (interview.getNoteSet() != null && interview.getNoteSet().size() > 0) {
-                interview.getNoteSet().forEach(notes -> interviewDto.getNoteDtoSet().add(notesConverter.convert(notes)));
+                interview.getNoteSet().forEach(note -> interviewDto.getNoteDtoSet().add(noteConverter.convert(note)));
             }
 
             return interviewDto;
