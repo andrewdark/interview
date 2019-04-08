@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
-import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
+import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.entity.Interview;
 import ua.pp.darknsoft.service.interfaces.InterviewService;
 
@@ -29,8 +29,33 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public List<Interview> findAll() {
+    public List<InterviewDto> findAll() {
         return null;
+    }
+
+    @Override
+    public Page<InterviewDto> findAll(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public InterviewDto save(InterviewDto interview) {
+        return null;
+    }
+
+    @Override
+    public InterviewDto update(InterviewDto interview) {
+        return null;
+    }
+
+    @Override
+    public boolean isExist(InterviewDto interview) {
+        return false;
+    }
+
+    @Override
+    public void deleteById(Long id) {
+
     }
 
     @Override
@@ -53,23 +78,5 @@ public class InterviewServiceImpl implements InterviewService {
         return filterInterviews;
     }
 
-    @Override
-    public Page<Interview> findAll(Pageable pageable) {
-        return null;
-    }
 
-    @Override
-    public Interview save(Interview interview) {
-        return null;
-    }
-
-    @Override
-    public boolean isExist(Interview interview) {
-        return false;
-    }
-
-    @Override
-    public void deleteById(Long id) {
-
-    }
 }

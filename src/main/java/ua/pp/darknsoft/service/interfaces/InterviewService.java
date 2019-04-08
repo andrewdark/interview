@@ -13,15 +13,17 @@ public interface InterviewService {
 
     Optional<InterviewDto> findById(Long id);
 
-    List<Interview> findAll();
+    List<InterviewDto> findAll();
 
     List<FilterInterviewBuilder> findWithFilter(FilterInterviewBuilder filterInterviewBuilder);
 
-    Page<Interview> findAll(Pageable pageable);
+    Page<InterviewDto> findAll(Pageable pageable);
 
-    Interview save(Interview interview);
+    InterviewDto save(InterviewDto interview);
 
-    boolean isExist(Interview interview);
+    InterviewDto update(InterviewDto interview);
+
+    boolean isExist(InterviewDto interview);
 
     void deleteById(Long id);
 }
