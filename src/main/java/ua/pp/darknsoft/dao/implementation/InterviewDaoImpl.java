@@ -19,7 +19,7 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
     public List<Interview> getFilteredInterviews(FilterInterviewBuilder filterInterviewBuilder) {
         Assert.notNull(filterInterviewBuilder, "BAD param. Interview is not null");
 
-        List<Interview> interviewList = getEntityManager()
+        return getEntityManager()
                 .createQuery("SELECT i FROM Interview i WHERE " +
                         "(i.position = :position  or :position IS NULL) " +
                         "AND (i.date = :date  or CAST(:date AS date) IS NULL) " +
@@ -34,6 +34,5 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
                 .setParameter("lastname", filterInterviewBuilder.getLastName())
                 .setParameter("email", filterInterviewBuilder.getEmail())
                 .getResultList();
-        return interviewList;
     }
 }

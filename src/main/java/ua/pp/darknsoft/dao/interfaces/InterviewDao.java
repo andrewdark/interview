@@ -6,5 +6,5 @@ import ua.pp.darknsoft.domain.entity.Interview;
 import java.util.List;
 
 public interface InterviewDao extends GenericDao<Interview, Long> {
-    public List<Interview> getFilteredInterviews(FilterInterviewBuilder filterInterviewBuilder);
+    List<Interview> getFilteredInterviews(FilterInterviewBuilder filterInterviewBuilder);
 }
