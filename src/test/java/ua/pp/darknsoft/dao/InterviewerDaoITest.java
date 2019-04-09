@@ -1,4 +1,4 @@
-package ua.pp.darknsoft;
+package ua.pp.darknsoft.dao;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

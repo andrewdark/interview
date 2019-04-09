@@ -1,4 +1,4 @@
-package ua.pp.darknsoft;
+package ua.pp.darknsoft.dao;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

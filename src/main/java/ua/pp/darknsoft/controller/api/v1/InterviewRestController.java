@@ -22,10 +22,10 @@ public class InterviewRestController {
     public ResponseEntity<InterviewDto> getSingleInterviewDto(@PathVariable Long id) {
         Optional<InterviewDto> interviewDto = interviewService.findById(id);
 
-        if (interviewDto.isEmpty()) {
-            return new ResponseEntity<InterviewDto>(HttpStatus.NOT_FOUND);
+        if (interviewDto.isPresent()) {
+            return new ResponseEntity<InterviewDto>(interviewDto.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<InterviewDto>(interviewDto.get(), HttpStatus.OK);
+        return new ResponseEntity<InterviewDto>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping(value = "/interviews")

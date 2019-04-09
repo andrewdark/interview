@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface InterviewDao extends GenericDao<Interview, Long> {
     List<Interview> getFilteredInterviews(FilterInterviewBuilder filterInterviewBuilder);
+
+    boolean isExist(Interview interview);
 }

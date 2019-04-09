@@ -1,11 +1,13 @@
 package ua.pp.darknsoft.dao.implementation;
 
+import org.hibernate.NonUniqueResultException;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.entity.Interview;
 
+import javax.persistence.NoResultException;
 import java.util.List;
 
 @Repository
@@ -34,5 +36,30 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
                 .setParameter("lastname", filterInterviewBuilder.getLastName())
                 .setParameter("email", filterInterviewBuilder.getEmail())
                 .getResultList();
+    }
+
+    @Override
+    public boolean isExist(Interview interview) {
+        try {
+            getEntityManager().createQuery("SELECT i FROM " + Interview.class.getSimpleName() + " i WHERE  " +
+                    "(i.position = :position) " +
+                    "AND (i.date = :date) " +
+                    "AND (i.candidate.firstName = :firstname) " +
+                    "AND (i.candidate.lastName = :lastname) " +
+                    "AND (i.candidate.email = :email)", Interview.class)
+                    .setParameter("position", interview.getPosition())
+                    .setParameter("date", interview.getDate())
+                    .setParameter("firstname", interview.getCandidate().getFirstName())
+                    .setParameter("lastname", interview.getCandidate().getLastName())
+                    .setParameter("email", interview.getCandidate().getEmail())
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return false;
+        } catch (NonUniqueResultException nre) {
+            return false; // or true ?? TODO
+        } catch (NullPointerException ex) {
+            //what we gonna do? TODO
+        }
+        return true;
     }
 }

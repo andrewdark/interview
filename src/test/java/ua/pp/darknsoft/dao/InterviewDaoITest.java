@@ -1,4 +1,4 @@
-package ua.pp.darknsoft;
+package ua.pp.darknsoft.dao;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,8 +23,7 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @Rollback
 @Transactional
@@ -180,5 +179,29 @@ public class InterviewDaoITest {
         List<Interview> interviewList = interviewDao.getFilteredInterviews(fid);
         assertEquals(1, interviewList.size());
         assertEquals(EMAIL, interviewList.get(0).getCandidate().getEmail());
+    }
+    @Test
+    public void isInterviewExist(){
+        // Given
+        Interview interview01 = new Interview();
+        interview01.setStatus(Status.INTERVIEWED);
+        interview01.setDate(I_DATE02);
+        interview01.setPosition("Manual QA");
+        Candidate candidate01 = new Candidate();
+        candidate01.setFirstName("Vincent");
+        candidate01.setLastName("Vega");
+        candidate01.setEmail("vv@pf.com");
+        interview01.setCandidate(candidate01);
+
+        Interview interview02 = new Interview();
+        interview02.setStatus(Status.INTERVIEWED);
+        interview02.setPosition("Cleaning manager");
+        interview02.setDate(I_DATE04);
+        interview02.setCandidate(candidate01);
+        // When
+
+        // Then
+        assertTrue(interviewDao.isExist(interview01));
+        assertFalse(interviewDao.isExist(interview02));
     }
 }

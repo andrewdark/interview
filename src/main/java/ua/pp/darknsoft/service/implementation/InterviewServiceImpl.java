@@ -36,32 +36,31 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<InterviewDto> findAll() {
         return null;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Page<InterviewDto> findAll(Pageable pageable) {
         return null;
     }
 
     @Override
     public InterviewDto save(InterviewDto interviewDto) {
-
         interviewDao.save(toInterview.convert(interviewDto));
-
         return interviewDto;
     }
 
     @Override
     public InterviewDto update(InterviewDto interviewDto) {
-
         return toInterviewDto.convert(interviewDao.update(toInterview.convert(interviewDto)));
     }
 
     @Override
     public boolean isExist(InterviewDto interviewDto) {
-        return false;
+        return interviewDao.isExist(toInterview.convert(interviewDto));
     }
 
     @Override
@@ -69,6 +68,7 @@ public class InterviewServiceImpl implements InterviewService {
 
     }
 
+    //TODO
     @Override
     public List<FilterInterviewBuilder> findWithFilter(FilterInterviewBuilder filterInterviewBuilder) {
 
@@ -84,7 +84,6 @@ public class InterviewServiceImpl implements InterviewService {
                     .withEmail(inter.getCandidate().getEmail())
                     .build();
             filterInterviews.add(fid);
-
         }
         return filterInterviews;
     }
