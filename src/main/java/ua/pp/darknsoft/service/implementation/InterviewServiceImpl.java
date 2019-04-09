@@ -6,6 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.InterviewDao;
+import ua.pp.darknsoft.domain.converter.InterviewDtoToInterview;
+import ua.pp.darknsoft.domain.converter.InterviewToInterviewDto;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.entity.Interview;
@@ -21,6 +23,11 @@ public class InterviewServiceImpl implements InterviewService {
 
     @Autowired
     InterviewDao interviewDao;
+
+    @Autowired
+    InterviewToInterviewDto toInterviewDto;
+
+    InterviewDtoToInterview toInterview;
 
     @Override
     public Optional<InterviewDto> findById(Long id) {
@@ -39,17 +46,21 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewDto save(InterviewDto interview) {
-        return null;
+    public InterviewDto save(InterviewDto interviewDto) {
+
+        interviewDao.save(toInterview.convert(interviewDto));
+
+        return interviewDto;
     }
 
     @Override
-    public InterviewDto update(InterviewDto interview) {
-        return null;
+    public InterviewDto update(InterviewDto interviewDto) {
+
+        return toInterviewDto.convert(interviewDao.update(toInterview.convert(interviewDto)));
     }
 
     @Override
-    public boolean isExist(InterviewDto interview) {
+    public boolean isExist(InterviewDto interviewDto) {
         return false;
     }
 

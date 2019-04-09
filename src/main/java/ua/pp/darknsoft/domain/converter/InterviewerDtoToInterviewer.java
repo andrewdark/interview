@@ -2,9 +2,11 @@ package ua.pp.darknsoft.domain.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import ua.pp.darknsoft.domain.dto.InterviewerDto;
 import ua.pp.darknsoft.domain.entity.Interviewer;
 
+@Component
 public class InterviewerDtoToInterviewer implements Converter<InterviewerDto, Interviewer> {
 
     private final Object $lock = new Object[0];

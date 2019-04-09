@@ -2,9 +2,11 @@ package ua.pp.darknsoft.domain.converter;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.lang.Nullable;
+import org.springframework.stereotype.Component;
 import ua.pp.darknsoft.domain.dto.CandidateDto;
 import ua.pp.darknsoft.domain.entity.Candidate;
 
+@Component
 public class CandidateDtoToCandidate implements Converter<CandidateDto, Candidate> {
     private final Object $lock = new Object[0];
 
