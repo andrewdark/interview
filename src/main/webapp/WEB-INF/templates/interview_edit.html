@@ -69,13 +69,13 @@
                     <td>
                         <!--<span th:text="${inote.note != null}  ? 'YES' : 'NO'"></span>-->
                     </td>
-                    <td><a href="">View</a></td>
+                    <td><a href="" onclick="nsy()">View</a></td>
                 </tr>
             </th:block>
         </table>
     </div>
     <div id="inner4" class="inner4">
-        <button class="back">Save</button>  <button class="back">Back</button>
+        <button class="save" onclick="nsy()">Save</button>  <button class="back" onclick="location.href='/interview/'">Back</button>
     </div>
 </div>
 </body>

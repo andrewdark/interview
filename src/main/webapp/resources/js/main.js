@@ -74,3 +74,11 @@ function searchFilteredInterviews() {
     });
 
 }
+
+function editInterview() {
+    alert("Not support yet");
+}
+
+function nsy() {
+    alert("Not support yet");
+}

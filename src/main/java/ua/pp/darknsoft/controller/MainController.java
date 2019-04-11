@@ -21,7 +21,7 @@ public class MainController {
         return "index";
     }
 
-    @RequestMapping(value = "/interview/edit/{id}")
+    @RequestMapping(value = "/interviews/edit/{id}")
     public String showIntervievEdit(@PathVariable Long id, Model dasModel) {
 
         InterviewDto interviewDto = interviewService.findById(id).orElse(new InterviewDto());

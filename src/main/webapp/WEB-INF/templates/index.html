@@ -85,7 +85,7 @@
                     <td th:text="${inter.position}">...</td>
                     <td th:text="${inter.Status}">...</td>
                     <td>
-                        <a href="">View</a>&nbsp;<a href="">Conduct</a>&nbsp;<a th:href="'interview/edit/'+${inter.id}">Edit</a>
+                        <a href="" onclick="nsy()">View</a>&nbsp;<a href="" onclick="nsy()">Conduct</a>&nbsp;<a th:href="@{/interviews/edit/}+${inter.id}">Edit</a>
                     </td>
                 </tr>
             </th:block>
