@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Interview - edit</title>
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <script type="text/javascript" th:src="@{/js/vendor/jquery-2.2.4.min.js}"></script>
+    <script type="text/javascript" th:src="@{/js/main.js}"></script>
+</head>
+<body>
+<div id="wrapper">
+    <div id="inner1">
+        <ul class="menu">
+            <li><a href="">Main</a></li>
+            <li><a href="">Search</a>
+                <ul>
+                    <li><a href="">Get All</a></li>
+                    <li><a href="">Get Filtered</a></li>
+                </ul>
+            </li>
+
+            <li><a href="">Reviews</a></li>
+            <li><a href="https://github.com/andrewdark/interview">View source code</a></li>
+        </ul>
+    </div>
+    <div id="inner2">
+        <table class="interview">
+            <caption>Edit Interview</caption>
+            <tr>
+                <td>First Name:</td><td><input disabled id="firstName" type="text" th:value="${interview.candidateDto.firstName}"></td>
+                <td>Date:*</td><td><input id="date" type="date" th:value="${interview.date}"></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td><td><input disabled id="lastName" type="text" th:value="${interview.candidateDto.lastName}"></td>
+                <td>Status:*</td>
+                <td>
+                    <select id='status' name='status'>
+                        <option value='' th:text="${interview.status}"></option>
+                        <option th:each="status : ${T(ua.pp.darknsoft.domain.entity.Status).values()}" th:value="${status}" th:text="${status.displayName}"></option>
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Position:*</td><td><input id="position" name="position" type="text"  th:value="${interview.position}"></td>
+                <td></td><td></td>
+            </tr>
+            <tr>
+                <td>Email:*</td><td><input id="email" name="email" type="text" th:value="${interview.candidateDto.email}"></td>
+                <td></td><td></td>
+            </tr>
+        </table>
+    </div>
+    <div id="inner3" class="inner3">
+        <table class="Interview">
+            <caption>Interviewers notes</caption>
+            <tr>
+                <th class="col">Interviewer's First Name</th>
+                <th class="col">Interviewer's Last Name</th>
+                <th class="col">Interviewer's Email</th>
+                <th class="col">Notes</th>
+                <th class="col">Actions</th>
+            </tr>
+            <th:block th:each="inter: ${interview.interviewerDtoSet}" >
+                <tr>
+                    <td th:text="${inter.firstName}"></td>
+                    <td th:text="${inter.lastName}"></td>
+                    <td th:text="${inter.email}"></td>
+                    <td>
+                        <!--<span th:text="${inote.note != null}  ? 'YES' : 'NO'"></span>-->
+                    </td>
+                    <td><a href="">View</a></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+    <div id="inner4" class="inner4">
+        <button class="back">Save</button>  <button class="back">Back</button>
+    </div>
+</div>
+</body>
+</html>

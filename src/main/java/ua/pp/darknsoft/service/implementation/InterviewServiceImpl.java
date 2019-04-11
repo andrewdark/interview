@@ -1,21 +1,16 @@
 package ua.pp.darknsoft.service.implementation;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import ua.pp.darknsoft.dao.interfaces.InterviewDao;
-import ua.pp.darknsoft.domain.converter.InterviewDtoToInterview;
-import ua.pp.darknsoft.domain.converter.InterviewToInterviewDto;
-import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
-import ua.pp.darknsoft.domain.dto.InterviewDto;
-import ua.pp.darknsoft.domain.entity.Interview;
-import ua.pp.darknsoft.service.interfaces.InterviewService;
+import org.springframework.beans.factory.annotation.*;
+import org.springframework.data.domain.*;
+import org.springframework.stereotype.*;
+import org.springframework.transaction.annotation.*;
+import ua.pp.darknsoft.dao.interfaces.*;
+import ua.pp.darknsoft.domain.converter.*;
+import ua.pp.darknsoft.domain.dto.*;
+import ua.pp.darknsoft.domain.entity.*;
+import ua.pp.darknsoft.service.interfaces.*;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -26,13 +21,13 @@ public class InterviewServiceImpl implements InterviewService {
 
     @Autowired
     InterviewToInterviewDto toInterviewDto;
-
+    @Autowired
     InterviewDtoToInterview toInterview;
 
     @Override
     public Optional<InterviewDto> findById(Long id) {
-        Optional<InterviewDto> userOptional = Optional.of(new InterviewDto());
-        return userOptional;
+        Optional<InterviewDto> interviewOptional = Optional.ofNullable(toInterviewDto.convert(interviewDao.findById(id)));
+        return interviewOptional;
     }
 
     @Override

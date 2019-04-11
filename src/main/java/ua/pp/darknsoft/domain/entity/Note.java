@@ -51,13 +51,13 @@ public class Note extends AbstractEntity {
         this.score = score;
     }
 
-    public Interview getInterview() {
-        return interview;
-    }
-
-    public void setInterview(Interview interview) {
-        this.interview = interview;
-    }
+//    public Interview getInterview() {
+//        return interview;
+//    }
+//
+//    public void setInterview(Interview interview) {
+//        this.interview = interview;
+//    }
 
     public Interviewer getInterviewer() {
         return interviewer;

@@ -28,30 +28,41 @@
         <table class="interview">
             <caption>Interviews Search</caption>
             <tr>
-                <td>First Name:</td><td><input id="firstName" type="text"></td>
-                <td>Date:</td><td><input id="date" type="date"></td>
+                <td>First Name:</td>
+                <td><input id="firstName" type="text"></td>
+                <td>Date:</td>
+                <td><input id="date" type="date"></td>
             </tr>
             <tr>
-                <td>Last Name:</td><td><input id="lastName" type="text"></td>
+                <td>Last Name:</td>
+                <td><input id="lastName" type="text"></td>
                 <td>Status:</td>
                 <td>
                     <select id='status' name='status'>
                         <option value=''></option>
-                        <option th:each="status : ${T(ua.pp.darknsoft.domain.entity.Status).values()}" th:value="${status}" th:text="${status.displayName}"></option>
+                        <option th:each="status : ${T(ua.pp.darknsoft.domain.entity.Status).values()}"
+                                th:value="${status}" th:text="${status.displayName}"></option>
                         </option>
                     </select>
                 </td>
             </tr>
             <tr>
-                <td>Position:</td><td><input id="position" name="position" type="text"></td>
-                <td></td><td></td>
+                <td>Position:</td>
+                <td><input id="position" name="position" type="text"></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td>Email:</td><td><input id="email" name="email" type="text"></td>
-                <td></td><td></td>
+                <td>Email:</td>
+                <td><input id="email" name="email" type="text"></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr>
-                <td><button class="search" onclick="searchFilteredInterviews()">Search</button></td><td></td>
+                <td>
+                    <button class="search" onclick="searchFilteredInterviews()">Search</button>
+                </td>
+                <td></td>
             </tr>
         </table>
     </div>
@@ -74,7 +85,7 @@
                     <td th:text="${inter.position}">...</td>
                     <td th:text="${inter.Status}">...</td>
                     <td>
-                        <a href="">View</a>&nbsp;<a href="">Conduct</a>&nbsp;<a href="">Edit</a>
+                        <a href="">View</a>&nbsp;<a href="">Conduct</a>&nbsp;<a th:href="'interview/edit/'+${inter.id}">Edit</a>
                     </td>
                 </tr>
             </th:block>
