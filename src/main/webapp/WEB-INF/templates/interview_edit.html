@@ -61,14 +61,12 @@
                 <th class="col">Notes</th>
                 <th class="col">Actions</th>
             </tr>
-            <th:block th:each="inter: ${interview.interviewerDtoSet}" >
+            <th:block th:each="entry : ${hasNote}" >
                 <tr>
-                    <td th:text="${inter.firstName}"></td>
-                    <td th:text="${inter.lastName}"></td>
-                    <td th:text="${inter.email}"></td>
-                    <td>
-                        <!--<span th:text="${inote.note != null}  ? 'YES' : 'NO'"></span>-->
-                    </td>
+                    <td th:text="${entry.key.firstName}"></td>
+                    <td th:text="${entry.key.lastName}"></td>
+                    <td th:text="${entry.key.email}"></td>
+                    <td th:text="${entry.value} ? 'YES' : 'NO'"></td>
                     <td><a href="" onclick="nsy()">View</a></td>
                 </tr>
             </th:block>

@@ -4,9 +4,11 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import ua.pp.darknsoft.domain.dto.InterviewDto;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
+import ua.pp.darknsoft.domain.dto.InterviewerDto;
 import ua.pp.darknsoft.domain.entity.Interview;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface InterviewService {
@@ -26,4 +28,6 @@ public interface InterviewService {
     boolean isExist(InterviewDto interview);
 
     void deleteById(Long id);
+
+    Map<InterviewerDto, Boolean> hasNote(InterviewDto interviewDto);
 }

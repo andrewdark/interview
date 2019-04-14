@@ -1,14 +1,18 @@
 package ua.pp.darknsoft.service.implementation;
 
-import org.springframework.beans.factory.annotation.*;
-import org.springframework.data.domain.*;
-import org.springframework.stereotype.*;
-import org.springframework.transaction.annotation.*;
-import ua.pp.darknsoft.dao.interfaces.*;
-import ua.pp.darknsoft.domain.converter.*;
-import ua.pp.darknsoft.domain.dto.*;
-import ua.pp.darknsoft.domain.entity.*;
-import ua.pp.darknsoft.service.interfaces.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import ua.pp.darknsoft.dao.interfaces.InterviewDao;
+import ua.pp.darknsoft.domain.converter.InterviewDtoToInterview;
+import ua.pp.darknsoft.domain.converter.InterviewToInterviewDto;
+import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
+import ua.pp.darknsoft.domain.dto.InterviewDto;
+import ua.pp.darknsoft.domain.dto.InterviewerDto;
+import ua.pp.darknsoft.domain.entity.Interview;
+import ua.pp.darknsoft.service.interfaces.InterviewService;
 
 import java.util.*;
 
@@ -83,5 +87,14 @@ public class InterviewServiceImpl implements InterviewService {
         return filterInterviews;
     }
 
+    @Override
+    public Map<InterviewerDto, Boolean> hasNote(InterviewDto interviewDto) {
 
+        Map<InterviewerDto, Boolean> interviewerBooleanMap = new HashMap<>();
+
+        interviewDto.getInterviewerDtoSet().stream().forEach(master -> interviewerBooleanMap.put(master, false));
+        interviewDto.getNoteDtoSet().stream().map(n -> n.getInterviewerDto()).forEach(master -> interviewerBooleanMap.put(master, true));
+
+        return interviewerBooleanMap;
+    }
 }

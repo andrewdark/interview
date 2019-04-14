@@ -27,6 +27,7 @@ public class MainController {
         InterviewDto interviewDto = interviewService.findById(id).orElse(new InterviewDto());
 
         dasModel.addAttribute("interview", interviewDto);
+        dasModel.addAttribute("hasNote", interviewService.hasNote(interviewDto));
         return "interview_edit";
     }
 }
