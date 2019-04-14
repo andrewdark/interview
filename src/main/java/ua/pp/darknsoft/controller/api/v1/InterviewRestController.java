@@ -3,6 +3,7 @@ package ua.pp.darknsoft.controller.api.v1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.pp.darknsoft.domain.dto.FilterInterviewBuilder;
 import ua.pp.darknsoft.domain.dto.FilterInterviewDto;
@@ -36,7 +37,7 @@ public class InterviewRestController {
 
 
     @PostMapping(value = "/interviews")
-    public ResponseEntity<InterviewDto> createInterviewDto(@RequestBody InterviewDto interviewDto) {
+    public ResponseEntity<InterviewDto> createInterviewDto(@Validated @RequestBody InterviewDto interviewDto) {
         if (interviewService.isExist(interviewDto)) {
             return new ResponseEntity<InterviewDto>(HttpStatus.CONFLICT);
         }
@@ -44,7 +45,7 @@ public class InterviewRestController {
     }
 
     @PutMapping(value = "/interviews/{id}")
-    public ResponseEntity<InterviewDto> updateInterviewDto(@PathVariable Long id, @RequestBody InterviewDto interviewDto) {
+    public ResponseEntity<InterviewDto> updateInterviewDto(@Validated @PathVariable Long id, @RequestBody InterviewDto interviewDto) {
         InterviewDto currentInterviewDto = interviewService.findById(id).get();
         if (currentInterviewDto == null) {
             return new ResponseEntity<InterviewDto>(HttpStatus.NOT_FOUND);
@@ -59,14 +60,14 @@ public class InterviewRestController {
             currentInterviewDto.getCandidateDto().setSkype(interviewDto.getCandidateDto().getSkype());
             currentInterviewDto.getCandidateDto().setPhone(interviewDto.getCandidateDto().getPhone());
         }
-        if (interviewDto.getInterviewerDtoSet() != null) {
-            //TODO
-            //currentInterviewDto.setInterviewerDtoSet(interviewDto.getInterviewerDtoSet());
-        }
-        if (interviewDto.getNoteDtoSet() != null) {
-            //TODO
-            //currentInterviewDto.setNoteDtoSet(interviewDto.getNoteDtoSet());
-        }
+        //TODO
+//        if (interviewDto.getInterviewerDtoSet() != null) {
+//
+//            currentInterviewDto.setInterviewerDtoSet(interviewDto.getInterviewerDtoSet());
+//        }
+//        if (interviewDto.getNoteDtoSet() != null) {
+//            currentInterviewDto.setNoteDtoSet(interviewDto.getNoteDtoSet());
+//        }
         return new ResponseEntity<InterviewDto>(interviewService.update(currentInterviewDto), HttpStatus.OK);
     }
 

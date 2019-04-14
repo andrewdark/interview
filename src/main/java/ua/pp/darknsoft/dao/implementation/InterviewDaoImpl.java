@@ -40,6 +40,8 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
 
     @Override
     public boolean isExist(Interview interview) {
+        Assert.notNull(interview, "BAD param. Interview should not be null");
+        Assert.notNull(interview.getCandidate(), "BAD param. Candidate should not be null");
         try {
             getEntityManager().createQuery("SELECT i FROM " + Interview.class.getSimpleName() + " i WHERE  " +
                     "(i.position = :position) " +
@@ -56,9 +58,7 @@ public class InterviewDaoImpl extends GenericDaoImpl<Interview, Long> implements
         } catch (NoResultException nre) {
             return false;
         } catch (NonUniqueResultException nre) {
-            return false; // or true ?? TODO
-        } catch (NullPointerException ex) {
-            //what we gonna do? TODO
+            return true; // or false ?? TODO
         }
         return true;
     }
