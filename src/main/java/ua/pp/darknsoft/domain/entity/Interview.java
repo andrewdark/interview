@@ -10,7 +10,7 @@ import java.util.Set;
 @Entity
 public class Interview extends AbstractEntity {
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST })
     @JoinColumn(name = "candidate_id", nullable = false,
             foreignKey = @ForeignKey(name = "FK_INTERVIEW_CANDIDATE"))
     private Candidate candidate;

@@ -2,7 +2,6 @@ package ua.pp.darknsoft.dao.implementation;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
 import ua.pp.darknsoft.dao.interfaces.GenericDao;
 
 import javax.persistence.EntityManager;
@@ -66,4 +65,6 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
     public void delete(T entity) {
         getEntityManager().remove(entity);
     }
+
+
 }

@@ -53,8 +53,25 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
+    @Transactional
     public InterviewDto update(InterviewDto interviewDto) {
-        return toInterviewDto.convert(interviewDao.update(toInterview.convert(interviewDto)));
+
+        Interview currentInterview = interviewDao.findById(interviewDto.getId());
+
+        if (currentInterview == null) {
+           // return smth
+        }
+        currentInterview.setPosition(interviewDto.getPosition());
+        currentInterview.setStatus(interviewDto.getStatus());
+        currentInterview.setDate(interviewDto.getDate());
+        if (interviewDto.getCandidateDto() != null) {
+            currentInterview.getCandidate().setFirstName(interviewDto.getCandidateDto().getFirstName());
+            currentInterview.getCandidate().setLastName(interviewDto.getCandidateDto().getLastName());
+            currentInterview.getCandidate().setEmail(interviewDto.getCandidateDto().getEmail());
+            currentInterview.getCandidate().setSkype(interviewDto.getCandidateDto().getSkype());
+            currentInterview.getCandidate().setPhone(interviewDto.getCandidateDto().getPhone());
+        }
+        return toInterviewDto.convert(interviewDao.update(currentInterview));
     }
 
     @Override

@@ -1,6 +1,7 @@
 package ua.pp.darknsoft.domain.entity;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * <p>
@@ -13,7 +14,7 @@ import javax.persistence.*;
  * @since 1.0
  */
 @MappedSuperclass
-public abstract class AbstractEntity {
+public abstract class AbstractEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -26,7 +26,7 @@ public class Candidate extends AbstractEntity {
 
     private String phone;
 
-    @OneToMany(mappedBy = "candidate", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "candidate")
     private Set<Interview> interviewSet = new HashSet<>();
 
     @Version
