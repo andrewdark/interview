@@ -66,5 +66,4 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDao<T, ID> {
         getEntityManager().remove(entity);
     }
 
-
 }
