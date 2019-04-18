@@ -73,7 +73,7 @@ public class PersistenceJPAConfig {
 
     /**
      * Creates a transaction manager bean of {@link JpaTransactionManager}
-     * which is implementation of {@link PlatformTransactionManager} that integrates
+     * which is implementations of {@link PlatformTransactionManager} that integrates
      * the JPA provider with the Spring transaction mechanism.
      *
      * @param entityManagerFactory entity manager factory

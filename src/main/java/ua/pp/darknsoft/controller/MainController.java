@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.*;
 import org.springframework.stereotype.*;
 import org.springframework.ui.*;
 import org.springframework.web.bind.annotation.*;
+import ua.pp.darknsoft.domain.builder.InterviewFilterBuilder;
 import ua.pp.darknsoft.domain.dto.*;
 import ua.pp.darknsoft.service.interfaces.*;
 
@@ -16,8 +17,8 @@ public class MainController {
 
     @RequestMapping(value = "/")
     public String index(Model dasModel) {
-        List<FilterInterviewBuilder> interviews = interviewService.findWithFilter(new FilterInterviewBuilder.Builder().build());
-        dasModel.addAttribute("interviews", interviews);
+        InterviewFilterDto fib = new InterviewFilterBuilder().build();
+        dasModel.addAttribute("interviews", interviewService.findWithFilter(fib));
         return "index";
     }
 

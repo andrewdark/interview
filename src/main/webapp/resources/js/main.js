@@ -47,8 +47,8 @@ function searchFilteredInterviews() {
             var tmp = "";
             for (j = 0; j < result.length; j++) {
                 var ddd = result[j].date;
-                tmp = tmp + "<tr><td>" + result[j].firstName + "</td>" +
-                    "<td>" + result[j].lastName + "</td>" +
+                tmp = tmp + "<tr><td>" + result[j].candidateDto.firstName + "</td>" +
+                    "<td>" + result[j].candidateDto.lastName + "</td>" +
                     "<td>" + ddd + "</td>" +
                     "<td>" + result[j].position + "</td>" +
                     "<td>" + result[j].status + "</td>" +
@@ -85,7 +85,7 @@ function editInterviewsDto() {
 
     url2 = $(location).attr("href");
     var id = this.url2.substr(this.url2.lastIndexOf('/') + 1);
-    alert("URL: /interview/api/v1/interviews/" + id);
+
     if (position === '') {
         position = null;
     }
@@ -109,7 +109,7 @@ function editInterviewsDto() {
         position: position,
         status: status,
         date: date,
-        CandidateDto: {
+        candidateDto: {
             firstName: firstName,
             lastName: lastName,
             email: email

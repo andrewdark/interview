@@ -1,26 +1,29 @@
 package ua.pp.darknsoft.domain.dto;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import ua.pp.darknsoft.domain.entity.Status;
-import ua.pp.darknsoft.util.LocalDateDeserializer;
-import ua.pp.darknsoft.util.LocalDateSerializer;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * <p>
+ * This class is DTO class was burned from entity.Interview.class
+ * </p>
+ *
+ * @author <a href='mailto:samsonov.a@ukr.net'>Samsonov Andrew</a>
+ * @since 1.0
+ */
+
 public class InterviewDto {
-    @NotNull
+
     private Long id;
     @NotNull
     private String position;
     @NotNull
     private Status status;
     @NotNull
-    @JsonDeserialize(using = LocalDateDeserializer.class)
-    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
     @NotNull
     private CandidateDto candidateDto;
@@ -87,21 +90,29 @@ public class InterviewDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof InterviewDto)) return false;
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof InterviewDto)) {
+            return false;
+        }
 
         InterviewDto that = (InterviewDto) o;
 
-        if (!position.equals(that.position)) return false;
-        if (!date.equals(that.date)) return false;
-        return candidateDto.equals(that.candidateDto);
+        if (position != null ? !position.equals(that.position) : that.position != null) {
+            return false;
+        }
+        if (date != null ? !date.equals(that.date) : that.date != null) {
+            return false;
+        }
+        return candidateDto != null ? candidateDto.equals(that.candidateDto) : that.candidateDto == null;
     }
 
     @Override
     public int hashCode() {
-        int result = position.hashCode();
-        result = 31 * result + date.hashCode();
-        result = 31 * result + candidateDto.hashCode();
+        int result = position != null ? position.hashCode() : 0;
+        result = 31 * result + (date != null ? date.hashCode() : 0);
+        result = 31 * result + (candidateDto != null ? candidateDto.hashCode() : 0);
         return result;
     }
 }

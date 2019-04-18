@@ -43,7 +43,7 @@ public class NoteDtoToNoteConverterTest {
         NoteDto noteDto = new NoteDto();
         noteDto.setId(ID);
         noteDto.setCriteria(CRITERIA);
-        noteDto.setNote(NOTE);
+        noteDto.setNoteText(NOTE);
         noteDto.setScore(SCORE);
         InterviewerDto interviewerDto = new InterviewerDto();
         interviewerDto.setId(INTERVIEWER_ID);

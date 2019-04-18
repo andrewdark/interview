@@ -114,19 +114,19 @@ public class InterviewDtoToInterviewConverterTest {
         NoteDto noteDto01 = new NoteDto();
         noteDto01.setId(NOTE_ID_01);
         noteDto01.setCriteria(NOTE_CRITERIA_01);
-        noteDto01.setNote(NOTE_NOTE_01);
+        noteDto01.setNoteText(NOTE_NOTE_01);
         noteDto01.setScore(NOTE_SCORE_01);
         noteDto01.setInterviewerDto(interviewerDto01);
         NoteDto noteDto02 = new NoteDto();
         noteDto02.setId(NOTE_ID_02);
         noteDto02.setCriteria(NOTE_CRITERIA_02);
-        noteDto02.setNote(NOTE_NOTE_02);
+        noteDto02.setNoteText(NOTE_NOTE_02);
         noteDto02.setScore(NOTE_SCORE_02);
         noteDto02.setInterviewerDto(interviewerDto02);
         NoteDto noteDto03 = new NoteDto();
         noteDto03.setId(NOTE_ID_03);
         noteDto03.setCriteria(NOTE_CRITERIA_03);
-        noteDto03.setNote(NOTE_NOTE_03);
+        noteDto03.setNoteText(NOTE_NOTE_03);
         noteDto03.setScore(NOTE_SCORE_03);
         noteDto03.setInterviewerDto(interviewerDto03);
 

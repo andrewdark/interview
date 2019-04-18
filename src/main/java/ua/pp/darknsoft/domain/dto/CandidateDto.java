@@ -3,6 +3,15 @@ package ua.pp.darknsoft.domain.dto;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+/**
+ * <p>
+ * This class is DTO class was burned from entity.Candidate.class
+ * </p>
+ *
+ * @author <a href='mailto:samsonov.a@ukr.net'>Samsonov Andrew</a>
+ * @since 1.0
+ */
+
 public class CandidateDto {
 
     private Long id;
@@ -68,21 +77,21 @@ public class CandidateDto {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof CandidateDto)) return false;
+        if (this == o) {return true;}
+        if (!(o instanceof CandidateDto)) {return false;}
 
         CandidateDto that = (CandidateDto) o;
 
-        if (!firstName.equals(that.firstName)) return false;
-        if (!lastName.equals(that.lastName)) return false;
-        return email.equals(that.email);
+        if (firstName != null ? !firstName.equals(that.firstName) : that.firstName != null) {return false;}
+        if (lastName != null ? !lastName.equals(that.lastName) : that.lastName != null) {return false;}
+        return email != null ? email.equals(that.email) : that.email == null;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName.hashCode();
-        result = 31 * result + lastName.hashCode();
-        result = 31 * result + email.hashCode();
+        int result = firstName != null ? firstName.hashCode() : 0;
+        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
         return result;
     }
 }

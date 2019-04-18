@@ -79,8 +79,8 @@
             </tr>
             <th:block th:each="inter : ${interviews}">
                 <tr>
-                    <td th:text="${inter.firstName}">...</td>
-                    <td th:text="${inter.lastName}">...</td>
+                    <td th:text="${inter.candidateDto.firstName}">...</td>
+                    <td th:text="${inter.candidateDto.lastName}">...</td>
                     <td th:text="${inter.date}">...</td>
                     <td th:text="${inter.position}">...</td>
                     <td th:text="${inter.Status}">...</td>
