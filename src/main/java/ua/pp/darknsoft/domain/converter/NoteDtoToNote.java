@@ -29,7 +29,9 @@ public class NoteDtoToNote implements Converter<NoteDto, Note> {
             note.setId(noteDto.getId());
             note.setCriteria(noteDto.getCriteria());
             note.setNote(noteDto.getNoteText());
-            note.setScore(noteDto.getScore());
+            if (noteDto.getScore() != null) {
+                note.setScore(noteDto.getScore());
+            }
             if (noteDto.getInterviewerDto() != null) {
                 note.setInterviewer(interviewerDtoConverter.convert(noteDto.getInterviewerDto()));
             }

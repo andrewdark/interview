@@ -13,7 +13,7 @@ public interface InterviewService {
     InterviewDto create(InterviewDto interview);
     void addInterviewer(InterviewerDto interviewer);
     Optional<InterviewDto> findById(Long id);
-    InterviewDto update(InterviewDto interviewDto);
+    Optional<InterviewDto> update(InterviewDto interviewDto);
     List<InterviewDto> findWithFilter(InterviewFilterDto filter);
     Map<InterviewerDto, Boolean> hasNote(InterviewDto interviewDto);
     Boolean isExist(InterviewDto interviewDto);

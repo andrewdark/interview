@@ -1,6 +1,10 @@
 package ua.pp.darknsoft.domain.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import ua.pp.darknsoft.domain.entity.Status;
+import ua.pp.darknsoft.util.LocalDateDeserializer;
+import ua.pp.darknsoft.util.LocalDateSerializer;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -24,6 +28,8 @@ public class InterviewDto {
     @NotNull
     private Status status;
     @NotNull
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
     private LocalDate date;
     @NotNull
     private CandidateDto candidateDto;

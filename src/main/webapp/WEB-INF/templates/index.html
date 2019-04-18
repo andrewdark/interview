@@ -83,7 +83,7 @@
                     <td th:text="${inter.candidateDto.lastName}">...</td>
                     <td th:text="${inter.date}">...</td>
                     <td th:text="${inter.position}">...</td>
-                    <td th:text="${inter.Status}">...</td>
+                    <td th:text="${inter.status.displayName}">...</td>
                     <td>
                         <a href="" onclick="nsy()">View</a>&nbsp;<a href="" onclick="nsy()">Conduct</a>&nbsp;<a th:href="@{/interviews/edit/}+${inter.id}">Edit</a>
                     </td>

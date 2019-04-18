@@ -51,7 +51,7 @@ function searchFilteredInterviews() {
                     "<td>" + result[j].candidateDto.lastName + "</td>" +
                     "<td>" + ddd + "</td>" +
                     "<td>" + result[j].position + "</td>" +
-                    "<td>" + result[j].status + "</td>" +
+                    "<td>" + result[j].status.displayName + "</td>" +
                     "<td><a href = '' >View</a>&nbsp;<a href=''>Conduct</a>&nbsp;<a href = '" + window.location.href.match(/^.*\//) + "interviews/edit/" + result[j].id + "' >Edit</a></td></tr>";
             }
 
@@ -122,7 +122,7 @@ function editInterviewsDto() {
         contentType: "application/json", //this is required for spring 3 - ajax to work (at least for me)
         data: JSON.stringify(InterviewDto), //json object or array of json objects
         success: function (result) {
-            alert("success" + result.id);
+            alert("success");
             //do nothing
         },
         error: function (jqXHR, textStatus, errorThrown) {

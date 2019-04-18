@@ -13,7 +13,12 @@ import ua.pp.darknsoft.domain.entity.Interview;
 import ua.pp.darknsoft.service.interfaces.InterviewService;
 
 import javax.transaction.Transactional;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static org.springframework.util.Assert.notNull;
@@ -79,13 +84,13 @@ public class InterviewServiceImpl implements InterviewService {
     }
 
     @Override
-    public InterviewDto update(InterviewDto interviewDto) {
+    public Optional<InterviewDto> update(InterviewDto interviewDto) {
         checkInterviewDtoAsNull(interviewDto);
 
         Interview currentInterview = interviewDao.findById(interviewDto.getId());
 
         if (currentInterview == null) {
-            // return smth
+            return Optional.empty();
         }
         currentInterview.setPosition(interviewDto.getPosition());
         currentInterview.setStatus(interviewDto.getStatus());
@@ -96,8 +101,7 @@ public class InterviewServiceImpl implements InterviewService {
         currentInterview.getCandidate().setSkype(interviewDto.getCandidateDto().getSkype());
         currentInterview.getCandidate().setPhone(interviewDto.getCandidateDto().getPhone());
 
-        return interviewToInterviewDto.convert(interviewDao.update(currentInterview));
-
+        return Optional.ofNullable(interviewToInterviewDto.convert(interviewDao.update(currentInterview)));
     }
 
     @Override

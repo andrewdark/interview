@@ -14,7 +14,7 @@ public class NoteDtoToNoteConverterTest {
     private static final Long ID = 1L;
     private static final String CRITERIA = "This is a criteria";
     private static final String NOTE = "This is some note";
-    private static final int SCORE = 4;
+    private static final Integer SCORE = 4;
     private static final Long INTERVIEWER_ID = 3L;
     private static final String INTERVIEWER_FN = "Quentin";
     private static final String INTERVIEWER_LN = "Tarantino";

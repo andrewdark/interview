@@ -1,5 +1,8 @@
 package ua.pp.darknsoft.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum Status {
     SCHEDULED("Scheduled Interview"),
     INTERVIEWED("Interviewed"),

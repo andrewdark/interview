@@ -14,7 +14,7 @@ public class Note extends AbstractEntity {
 
     @Pattern(regexp = "^[1-5]{1,1}$")
     @Column(nullable = false)
-    private int score;
+    private Integer score;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "interview_id", nullable = false, foreignKey = @ForeignKey(name = "FK_NOTES_INTERVIEW"))
@@ -43,21 +43,21 @@ public class Note extends AbstractEntity {
         this.note = note;
     }
 
-    public int getScore() {
+    public Integer getScore() {
         return score;
     }
 
-    public void setScore(int score) {
+    public void setScore(Integer score) {
         this.score = score;
     }
 
-//    public Interview getInterview() {
-//        return interview;
-//    }
-//
-//    public void setInterview(Interview interview) {
-//        this.interview = interview;
-//    }
+    public Interview getInterview() {
+        return interview;
+    }
+
+    public void setInterview(Interview interview) {
+        this.interview = interview;
+    }
 
     public Interviewer getInterviewer() {
         return interviewer;
